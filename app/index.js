@@ -13,7 +13,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { styles } from './style/index.js';
-import SignIn from './components/SignIn.js';
+import App from './app'
 
 const {width, height} = Dimensions.get('window');
 
@@ -22,7 +22,7 @@ export default class HomePage extends Component<Props> {
 
     render() {
         return (
-            <SignIn/>
+            <App/>
         );
     }
 }

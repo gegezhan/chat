@@ -22,9 +22,11 @@ export default class SignIn extends Component<Props> {
      * @returns {*}
      */
     submit = () => {
-
+        this.props.navigation.navigate("Tab")
     }
-
+    static navigationOptions = ({navigation}) => ({
+        header: null,
+    });
     render() {
         return (
             <ImageBackground style={styles.container} source= {require('../images/flo.jpeg')}>
@@ -63,7 +65,7 @@ export default class SignIn extends Component<Props> {
                         />
                     </View>
                     <View style={styles.form_submit}>
-                        <TouchableOpacity style={styles.form_submit_btn}>
+                        <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
                             <Text style={styles.form_submit_text}>
                                 登录
                             </Text>
