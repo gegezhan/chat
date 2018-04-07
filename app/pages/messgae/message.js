@@ -8,6 +8,7 @@ import {
     StyleSheet,
     View,
     Text,
+    Dimensions
 } from 'react-native';
 
 export default class Message extends React.Component {
@@ -24,9 +25,7 @@ export default class Message extends React.Component {
     render() {
         return (
             <View style={styles.containter}>
-                <Text>
-                    消息列表
-                </Text>
+
             </View>
         );
     }
