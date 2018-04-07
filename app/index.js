@@ -12,7 +12,7 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
-import { styles } from './style/index.js';
+import { styles } from './pages/login/style/index.js';
 import App from './app'
 
 const {width, height} = Dimensions.get('window');

@@ -35,8 +35,9 @@ export const styles = StyleSheet.create({
         color: '#fff',
         marginTop: 110
     },
-    form_wrap: {
-        top: 40
+
+    form: {
+        top: 10
     },
     input_wrap: {
         width: 300,

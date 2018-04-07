@@ -12,7 +12,7 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
-import { styles } from '../style/index.js';
+import { styles } from './style/index.js';
 
 type Props = {};
 export default class SignIn extends Component<Props> {
@@ -24,12 +24,27 @@ export default class SignIn extends Component<Props> {
     submit = () => {
         this.props.navigation.navigate("Tab")
     }
+
+    /**
+     * 跳转到新用户注册页面
+     */
+    signUp = () =>{
+        this.props.navigation.navigate("SignUp")
+    }
+
+    /**
+     * 跳转到忘记密码页面
+     */
+    forgetPassword = () => {
+        this.props.navigation.navigate("SignUp")
+    }
+
     static navigationOptions = ({navigation}) => ({
         header: null,
     });
     render() {
         return (
-            <ImageBackground style={styles.container} source= {require('../images/flo.jpeg')}>
+            <ImageBackground style={styles.container} source= {require('../../images/pur.jpeg')}>
                 <View style={styles.logo_wrap}>
                     <View style={styles.logo_dot}>
                         <Text style={styles.logo_text}>M</Text>
@@ -41,7 +56,7 @@ export default class SignIn extends Component<Props> {
                 <View style={styles.form_wrap}>
                     <View style={styles.input_wrap}>
                         <Image
-                            source={require('../images/user_b.png')}
+                            source={require('../../images/user_b.png')}
                             style={styles.icon}
                         />
                         <TextInput
@@ -54,7 +69,7 @@ export default class SignIn extends Component<Props> {
                     </View>
                     <View style={styles.input_wrap}>
                         <Image
-                            source={require('../images/pwd_b.png')}
+                            source={require('../../images/pwd_b.png')}
                             style={styles.icon}
                         />
                         <TextInput
@@ -72,12 +87,12 @@ export default class SignIn extends Component<Props> {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.forget_wrap}>
-                        <View style={styles.forget_pwd_wrap}>
+                        <TouchableOpacity onPress={this.forgetPassword} style={styles.forget_pwd_wrap}>
                             <Text style={styles.forget_pwd}>忘记密码</Text>
-                        </View>
-                        <View style={styles.forget_pwd_wrap}>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.signUp} style={styles.forget_pwd_wrap}>
                             <Text style={styles.new_user}>新用户注册</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ImageBackground>

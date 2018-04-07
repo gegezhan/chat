@@ -11,8 +11,9 @@ import {
     Image
 } from 'react-native';
 import {StackNavigator, TabNavigator, TabBarBottom,} from 'react-navigation';
-import Login from "./components/SignIn"
-
+import Login from "./pages/login/SignIn.js";
+import SignUp from './pages/login/SignUp.js';
+import ForgetPwd from './pages/login/ForgetPwd.js';
 
 import Message from './pages/messgae/message'
 import World from './pages/world/world'
@@ -130,6 +131,8 @@ const Tab = TabNavigator(
 const Navigator = StackNavigator(
     {
         Login: {screen: Login},
+        SignUp: {screen: SignUp},
+        ForgetPwd: {screen: ForgetPwd},
         Tab: {screen: Tab},
     },
     {
