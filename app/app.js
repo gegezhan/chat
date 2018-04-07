@@ -31,7 +31,7 @@ class TabBarItem extends PureComponent {
     }
 }
 const color = {
-    theme: '#e82190',
+    theme: '#e5ea7f',
     border: '#e0e0e0',
     background: '#f3f3f3'
 };
