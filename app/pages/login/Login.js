@@ -1,5 +1,5 @@
 /**
- * 忘记密码页面
+ * 登录注册页
  */
 import React, { Component } from 'react';
 import {
@@ -11,58 +11,91 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import ForgetPwd from "./ForgetPwd";
 
 type Props = {};
-export default class ForgetPwd extends Component<Props> {
+export default class Login extends Component<Props> {
+    constructor(props){
+        super(props);
+        this.state = {
+            status: 'sign-in'
+        }
+    }
 
     /**
      * 登录触发
      * @returns {*}
      */
     submit = () => {
+        this.props.navigation.navigate("Tab")
+    }
 
+    /**
+     * 返回登录页
+     */
+    signIn = () => {
+        this.setState({
+            status: 'sign-in'
+        })
+    }
+
+    /**
+     * 跳转到新用户注册页面
+     */
+    signUp = () =>{
+        this.setState({
+            status: 'sign-up'
+        })
+    }
+
+    /**
+     * 跳转到忘记密码页面
+     */
+    forgetPassword = () => {
+        this.setState({
+            status: 'forget-pwd'
+        })
     }
 
     static navigationOptions = ({navigation}) => ({
         header: null,
     });
 
+    /**
+     * 根据登录注册页面状态返回 dom
+     */
+    loginStatus = () => {
+        const { status } = this.state;
+        let component = '';
+        if(status === 'sign-in'){
+            component = <SignIn signUp={this.signUp} forgetPassword={this.forgetPassword} submit={this.submit}/>
+        }else if(status === 'sign-up'){
+            component = <SignUp signIn={this.signIn}/>
+        }else if(status === 'forget-pwd'){
+            component = <ForgetPwd/>
+        }
+        return component;
+    }
+
     render() {
         return (
-            <View style={styles.form_wrap}>
-                <View style={styles.input_wrap}>
-                    <Image
-                        source={require('../../images/login/user_b.png')}
-                        style={styles.icon}
-                    />
-                    <TextInput
-                        autoFocus={false}
-                        placeholder="输入邮箱或手机"
-                        style={styles.form_user}
-                        inlineImageLeft='email'
-                        underlineColorAndroid='transparent'
-                    />
+            <ImageBackground style={styles.container} source= {require('../../images/background/blue.jpeg')}>
+                <View>
+                    <View style={styles.logo_wrap}>
+                        <View style={styles.logo_dot}>
+                            <Text style={styles.logo_text}>M</Text>
+                        </View>
+                    </View>
+                    <Text style={styles.logo_sub_text}>
+                        Enjoy your life ~
+                    </Text>
                 </View>
-                <View style={styles.input_wrap}>
-                    <Image
-                        source={require('../../images/login/pwd_b.png')}
-                        style={styles.icon}
-                    />
-                    <TextInput
-                        autoFocus={false}
-                        placeholder="请输入密码"
-                        style={styles.form_pwd}
-                        underlineColorAndroid='transparent'
-                    />
-                </View>
-                <View style={styles.form_submit}>
-                    <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
-                        <Text style={styles.form_submit_text}>
-                            找回密码
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+                {
+                    this.loginStatus()
+                }
+            </ImageBackground>
         );
     }
 }

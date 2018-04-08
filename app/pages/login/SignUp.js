@@ -1,5 +1,5 @@
 /**
- * android homePage
+ * 注册页面
  */
 import React, { Component } from 'react';
 import {
@@ -21,102 +21,80 @@ export default class SignUp extends Component<Props> {
      * @returns {*}
      */
     submit = () => {
-        this.props.navigation.navigate("SignIn")
+
     }
     static navigationOptions = ({navigation}) => ({
         header: null,
     });
+
+    signIn = () => {
+        this.props.signIn ? this.props.signIn() : null
+    }
+
     render() {
         return (
-            <ImageBackground style={styles.container} source= {require('../../images/pur.jpeg')}>
-                <View style={styles.logo_wrap}>
-                    <View style={styles.logo_dot}>
-                        <Text style={styles.logo_text}>M</Text>
-                    </View>
+            <View style={styles.form}>
+                <View style={styles.input_wrap}>
+                    <Image
+                        source={require('../../images/login/user_b.png')}
+                        style={styles.icon}
+                    />
+                    <TextInput
+                        autoFocus={false}
+                        placeholder="邮箱或手机号"
+                        style={styles.form_user}
+                        inlineImageLeft='email'
+                        underlineColorAndroid='transparent'
+                    />
                 </View>
-                <View style={styles.form}>
-                    <View style={styles.input_wrap}>
-                        <TextInput
-                            autoFocus={false}
-                            placeholder="邮箱或手机号"
-                            style={styles.form_user}
-                            inlineImageLeft='email'
-                            underlineColorAndroid='transparent'
-                        />
-                    </View>
-                    <View style={styles.input_wrap}>
-                        <TextInput
-                            autoFocus={false}
-                            placeholder="密码"
-                            style={styles.form_pwd}
-                            underlineColorAndroid='transparent'
-                        />
-                    </View>
-                    <View style={styles.input_wrap}>
-                        <TextInput
-                            autoFocus={false}
-                            placeholder="确认密码"
-                            style={styles.form_pwd}
-                            underlineColorAndroid='transparent'
-                        />
-                    </View>
-                    <View style={styles.form_submit}>
-                        <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
-                            <Text style={styles.form_submit_text}>
-                                注册
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.input_wrap}>
+                    <Image
+                        source={require('../../images/login/pwd_b.png')}
+                        style={styles.icon}
+                    />
+                    <TextInput
+                        autoFocus={false}
+                        placeholder="密码"
+                        style={styles.form_pwd}
+                        underlineColorAndroid='transparent'
+                    />
                 </View>
-            </ImageBackground>
+                <View style={styles.input_wrap}>
+                    <Image
+                        source={require('../../images/login/pwd_b.png')}
+                        style={styles.icon}
+                    />
+                    <TextInput
+                        autoFocus={false}
+                        placeholder="确认密码"
+                        style={styles.form_pwd}
+                        underlineColorAndroid='transparent'
+                    />
+                </View>
+                <View style={styles.form_submit}>
+                    <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
+                        <Text style={styles.form_submit_text}>
+                            注册
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.forget_wrap}>
+                    <TouchableOpacity onPress={this.signIn} style={styles.forget_pwd_wrap}>
+                        <Text style={styles.to_sign_in}>返回登录页</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center',
-    },
-    //logo 样式
-    logo_wrap: {
-        width: 141,
-        height: 141,
-        top: 100,
-        borderRadius: 141,
-        borderColor: '#fff',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo_dot: {
-        width: 100,
-        height: 100,
-        borderColor: '#fff',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo_text: {
-        fontSize: 60,
-        textAlign: 'center',
-        margin: 10,
-        color: '#fff',
-    },
-    logo_sub_text: {
-        fontSize: 16,
-        textAlign: 'center',
-        margin: 10,
-        color: '#fff',
-        marginTop: 110
-    },
-
     //表单样式
     form: {
-        top: 160
+        top: 10
     },
     input_wrap: {
-        width: 260,
+        width: 300,
         flexDirection: 'row',
         height: 50,
         borderColor: 'transparent',
@@ -143,11 +121,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     form_submit: {
-        // top: 30,
+        top: 30,
     },
     form_submit_btn: {
         padding: 8,
-        backgroundColor: '#f3ecec',
+        backgroundColor: '#48ebf3',
+        opacity: 0.5,
         borderRadius: 5,
         borderColor: '#fff',
         borderWidth: 1,
@@ -164,10 +143,7 @@ const styles = StyleSheet.create({
     forget_pwd_wrap: {
         flex: 1,
     },
-    forget_pwd: {
-        textAlign: 'left',
+    to_sign_in: {
+        textAlign: 'center',
     },
-    new_user: {
-        textAlign: 'right',
-    }
 });

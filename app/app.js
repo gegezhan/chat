@@ -11,7 +11,7 @@ import {
     Image
 } from 'react-native';
 import {StackNavigator, TabNavigator, TabBarBottom,} from 'react-navigation';
-import Login from "./pages/login/SignIn.js";
+import Login from "./pages/login/Login";
 import SignUp from './pages/login/SignUp.js';
 import ForgetPwd from './pages/login/ForgetPwd.js';
 

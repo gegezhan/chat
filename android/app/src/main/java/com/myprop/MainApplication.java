@@ -1,4 +1,4 @@
-package com.myprop;
+package com.chat;
 
 import android.app.Application;
 
