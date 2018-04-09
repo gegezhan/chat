@@ -3,163 +3,123 @@
  */
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
-    Image,
-    ImageBackground,
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import { styles } from './style/index';
 
 type Props = {};
 export default class ForgetPwd extends Component<Props> {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            method: 'phone',
+        }
+    }
     /**
-     * 登录触发
+     * 找回密码
      * @returns {*}
      */
     submit = () => {
 
     }
 
-    static navigationOptions = ({navigation}) => ({
-        header: null,
-    });
+    /**
+     * 找回密码方式修改
+     */
+    methodChange = (method) => {
+        this.setState({method})
+    }
+
+    /**
+     * 找回密码
+     */
+    retrieveElem = (method) => {
+        let elem = '';
+        if(method === 'mail'){
+            elem = (
+                <View style={styles.retrieve_wrap}>
+                    <View style={styles.input_wrap}>
+                        <TextInput
+                            autoFocus={false}
+                            placeholder='输入邮箱地址'
+                            style={styles.form_user}
+                            inlineImageLeft='email'
+                            underlineColorAndroid='transparent'
+                        />
+                    </View>
+                    <View style={styles.form_submit}>
+                        <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
+                            <Text style={styles.form_submit_text}>
+                                发送验证码到邮箱
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )
+        } else {
+            elem = (
+                <View style={styles.retrieve_wrap}>
+                    <View style={styles.phone_wrap}>
+                        <TextInput
+                            autoFocus={false}
+                            placeholder='手机号'
+                            inlineImageLeft='email'
+                            underlineColorAndroid='transparent'
+                            style={styles.phone}
+                        />
+                        <TouchableOpacity onPress={this.submit}>
+                            <Text style={styles.get_identify_text}>
+                                获取验证码
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View>
+                        <TextInput
+                            autoFocus={false}
+                            placeholder="验证码"
+                            style={styles.identify_code}
+                            underlineColorAndroid='transparent'
+                        />
+                    </View>
+                    <View style={styles.form_submit}>
+                        <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
+                            <Text style={styles.form_submit_text}>
+                                找回密码
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )
+        }
+        return elem;
+    }
+
 
     render() {
+        const { method } = this.state;
         return (
-            <View style={styles.form_wrap}>
-                <View style={styles.input_wrap}>
-                    <Image
-                        source={require('../../images/login/user_b.png')}
-                        style={styles.icon}
-                    />
-                    <TextInput
-                        autoFocus={false}
-                        placeholder="输入邮箱或手机"
-                        style={styles.form_user}
-                        inlineImageLeft='email'
-                        underlineColorAndroid='transparent'
-                    />
-                </View>
-                <View style={styles.input_wrap}>
-                    <Image
-                        source={require('../../images/login/pwd_b.png')}
-                        style={styles.icon}
-                    />
-                    <TextInput
-                        autoFocus={false}
-                        placeholder="请输入密码"
-                        style={styles.form_pwd}
-                        underlineColorAndroid='transparent'
-                    />
-                </View>
-                <View style={styles.form_submit}>
-                    <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>
-                        <Text style={styles.form_submit_text}>
-                            找回密码
+            <View style={styles.form}>
+                <View style={styles.retrieve_method}>
+                    <TouchableOpacity onPress={(e) => this.methodChange('phone', e)} style={ method === 'phone' ? styles.retrieve_selected : styles.retrieve_unselected}>
+                        <Text style={styles.retrieve_text}>
+                            手机找回
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={(e) => this.methodChange('mail', e)} style={ method === 'mail' ? styles.retrieve_selected : styles.retrieve_unselected}>
+                        <Text style={styles.retrieve_text}>
+                            邮箱找回
                         </Text>
                     </TouchableOpacity>
                 </View>
+                {
+                    this.retrieveElem(method)
+                }
+
             </View>
         );
     }
 }
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center',
-    },
-    logo_wrap: {
-        width: 141,
-        height: 141,
-        top: 100,
-        borderRadius: 141,
-        borderColor: '#fff',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo_dot: {
-        width: 100,
-        height: 100,
-        borderColor: '#fff',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo_text: {
-        fontSize: 60,
-        textAlign: 'center',
-        margin: 10,
-        color: '#fff',
-    },
-    logo_sub_text: {
-        fontSize: 16,
-        textAlign: 'center',
-        margin: 10,
-        color: '#fff',
-        marginTop: 110
-    },
-
-    form: {
-        top: 10
-    },
-    input_wrap: {
-        width: 300,
-        flexDirection: 'row',
-        height: 50,
-        borderColor: 'transparent',
-        borderBottomColor: '#ccc',
-        borderWidth: 1,
-    },
-    icon: {
-        width: 24,
-        height: 30,
-        top: 10,
-        marginLeft: 10,
-        marginRight: 5
-    },
-    form_user: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_pwd: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_submit: {
-        top: 30,
-    },
-    form_submit_btn: {
-        padding: 8,
-        backgroundColor: '#48ebf3',
-        opacity: 0.5,
-        borderRadius: 5,
-        borderColor: '#fff',
-        borderWidth: 1,
-    },
-    form_submit_text: {
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    forget_wrap: {
-        width: 300,
-        top: 50,
-        flexDirection: 'row'
-    },
-    forget_pwd_wrap: {
-        flex: 1,
-    },
-    forget_pwd: {
-        textAlign: 'left',
-    },
-    new_user: {
-        textAlign: 'right',
-    }
-});

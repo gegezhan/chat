@@ -1,9 +1,10 @@
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: 'center',
     },
+    //logo
     logo_wrap: {
         width: 141,
         height: 141,
@@ -36,8 +37,10 @@ export const styles = StyleSheet.create({
         marginTop: 110
     },
 
+    //表单
     form: {
-        top: 10
+        top: 10,
+        alignItems: 'center',
     },
     input_wrap: {
         width: 300,
@@ -70,8 +73,10 @@ export const styles = StyleSheet.create({
         top: 30,
     },
     form_submit_btn: {
+        width: 300,
         padding: 8,
-        backgroundColor: '#f3ecec',
+        backgroundColor: '#f3c9d6',
+        opacity: 0.5,
         borderRadius: 5,
         borderColor: '#fff',
         borderWidth: 1,
@@ -93,5 +98,65 @@ export const styles = StyleSheet.create({
     },
     new_user: {
         textAlign: 'right',
+    },
+    to_sign_in: {
+        textAlign: 'center',
+    },
+    //找回密码
+    retrieve_method: {
+        width: 300,
+        flexDirection: 'row',
+    },
+    retrieve_selected: {
+        flex: 1,
+        padding: 8,
+        backgroundColor: '#fff',
+        opacity: 0.5,
+        borderColor: '#fff',
+        borderWidth: 1,
+    },
+    retrieve_unselected: {
+        flex: 1,
+        padding: 8,
+        backgroundColor: '#f3c9d6',
+        opacity: 0.5,
+        borderColor: '#fff',
+        borderWidth: 1,
+    },
+    retrieve_text: {
+        fontSize: 16,
+        textAlign: 'center',
+        color: '#000'
+    },
+    retrieve_wrap: {
+        top: 30
+    },
+    phone_wrap: {
+        height: 50,
+        flexDirection: 'row'
+    },
+    phone: {
+        borderColor: 'transparent',
+        borderBottomColor: '#ccc',
+        borderWidth: 1,
+        width: 200,
+    },
+    get_identify_text: {
+        textAlign: 'center',
+        width: 100,
+        height: 40,
+        top: 10,
+        padding: 8,
+        backgroundColor: '#f3c9d6',
+        opacity: 0.5,
+        borderRadius: 5,
+        borderColor: '#fff',
+        borderWidth: 1,
+    },
+    identify_code: {
+        width: 200,
+        borderColor: 'transparent',
+        borderBottomColor: '#ccc',
+        borderWidth: 1,
     }
 });

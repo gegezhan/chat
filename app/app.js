@@ -5,9 +5,6 @@
  */
 import React, { Component,PureComponent} from 'react';
 import {
-    StyleSheet,
-    View,
-    Text,
     Image
 } from 'react-native';
 import {StackNavigator, TabNavigator, TabBarBottom,} from 'react-navigation';

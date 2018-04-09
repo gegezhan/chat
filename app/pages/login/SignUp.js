@@ -3,30 +3,47 @@
  */
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Image,
-    ImageBackground,
-    Dimensions,
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import { styles } from './style/index';
 
 type Props = {};
 export default class SignUp extends Component<Props> {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            user: 'sylvia',
+            password: '123',
+            rePassword: ''
+        }
+    }
 
     /**
      * 登录触发
      * @returns {*}
      */
     submit = () => {
-
+        const { user, password, rePassword } = this.state;
+        if(password !== rePassword){
+            console.log('密码不一致，请重新确认！');
+            return;
+        }
+        let userData = {
+            user: user,
+            password: password,
+            rePassword: rePassword
+        };
+        this.props.submit ? this.props.submit(userData) : null;
     }
-    static navigationOptions = ({navigation}) => ({
-        header: null,
-    });
 
+    /**
+     * 返回登录页
+     */
     signIn = () => {
         this.props.signIn ? this.props.signIn() : null
     }
@@ -45,6 +62,8 @@ export default class SignUp extends Component<Props> {
                         style={styles.form_user}
                         inlineImageLeft='email'
                         underlineColorAndroid='transparent'
+                        value={this.state.user}
+                        onChangeText={(user) => this.setState({user})}
                     />
                 </View>
                 <View style={styles.input_wrap}>
@@ -57,6 +76,9 @@ export default class SignUp extends Component<Props> {
                         placeholder="密码"
                         style={styles.form_pwd}
                         underlineColorAndroid='transparent'
+                        value={this.state.password}
+                        onChangeText={(password) => this.setState({password})}
+                        secureTextEntry={true}
                     />
                 </View>
                 <View style={styles.input_wrap}>
@@ -69,6 +91,9 @@ export default class SignUp extends Component<Props> {
                         placeholder="确认密码"
                         style={styles.form_pwd}
                         underlineColorAndroid='transparent'
+                        value={this.state.rePassword}
+                        onChangeText={(rePassword) => this.setState({rePassword})}
+                        secureTextEntry={true}
                     />
                 </View>
                 <View style={styles.form_submit}>
@@ -88,62 +113,3 @@ export default class SignUp extends Component<Props> {
     }
 }
 
-const styles = StyleSheet.create({
-    //表单样式
-    form: {
-        top: 10
-    },
-    input_wrap: {
-        width: 300,
-        flexDirection: 'row',
-        height: 50,
-        borderColor: 'transparent',
-        borderBottomColor: '#ccc',
-        borderWidth: 1,
-    },
-    icon: {
-        width: 24,
-        height: 30,
-        top: 10,
-        marginLeft: 10,
-        marginRight: 5
-    },
-    form_user: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_pwd: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_submit: {
-        top: 30,
-    },
-    form_submit_btn: {
-        padding: 8,
-        backgroundColor: '#48ebf3',
-        opacity: 0.5,
-        borderRadius: 5,
-        borderColor: '#fff',
-        borderWidth: 1,
-    },
-    form_submit_text: {
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    forget_wrap: {
-        width: 300,
-        top: 50,
-        flexDirection: 'row'
-    },
-    forget_pwd_wrap: {
-        flex: 1,
-    },
-    to_sign_in: {
-        textAlign: 'center',
-    },
-});

@@ -7,10 +7,10 @@ import {
     Text,
     View,
     Image,
-    ImageBackground,
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import { styles } from './style/index';
 
 type Props = {};
 export default class SignIn extends Component<Props> {
@@ -18,7 +18,9 @@ export default class SignIn extends Component<Props> {
     constructor(props){
         super(props);
         this.state = {
-            status: 'sign-in'
+            status: 'sign-in',
+            user: 'sylvia',
+            password: '123'
         }
     }
 
@@ -31,7 +33,12 @@ export default class SignIn extends Component<Props> {
      * @returns {*}
      */
     submit = () => {
-        this.props.submit ? this.props.submit() : null;
+        const { user, password } = this.state;
+        let userData = {
+            user: user,
+            password: password
+        };
+        this.props.submit ? this.props.submit(userData) : null;
     }
 
     /**
@@ -48,7 +55,6 @@ export default class SignIn extends Component<Props> {
         this.props.forgetPassword ? this.props.forgetPassword() : null;
     }
 
-
     render() {
         return (
             <View style={styles.form}>
@@ -63,6 +69,8 @@ export default class SignIn extends Component<Props> {
                         style={styles.form_user}
                         inlineImageLeft='email'
                         underlineColorAndroid='transparent'
+                        value={this.state.user}
+                        onChangeText={(user) => this.setState({user})}
                     />
                 </View>
                 <View style={styles.input_wrap}>
@@ -75,6 +83,9 @@ export default class SignIn extends Component<Props> {
                         placeholder="请输入密码"
                         style={styles.form_pwd}
                         underlineColorAndroid='transparent'
+                        value={this.state.password}
+                        onChangeText={(password) => this.setState({password})}
+                        secureTextEntry={true}
                     />
                 </View>
                 <View style={styles.form_submit}>
@@ -96,64 +107,3 @@ export default class SignIn extends Component<Props> {
         );
     }
 }
-const styles = StyleSheet.create({
-    form: {
-        top: 10
-    },
-    input_wrap: {
-        width: 300,
-        flexDirection: 'row',
-        height: 50,
-        borderColor: 'transparent',
-        borderBottomColor: '#ccc',
-        borderWidth: 1,
-    },
-    icon: {
-        width: 24,
-        height: 30,
-        top: 10,
-        marginLeft: 10,
-        marginRight: 5
-    },
-    form_user: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_pwd: {
-        height: 50,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        flex: 1,
-    },
-    form_submit: {
-        top: 30,
-    },
-    form_submit_btn: {
-        padding: 8,
-        backgroundColor: '#48ebf3',
-        opacity: 0.5,
-        borderRadius: 5,
-        borderColor: '#fff',
-        borderWidth: 1,
-    },
-    form_submit_text: {
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    forget_wrap: {
-        width: 300,
-        top: 50,
-        flexDirection: 'row'
-    },
-    forget_pwd_wrap: {
-        flex: 1,
-    },
-    forget_pwd: {
-        textAlign: 'left',
-    },
-    new_user: {
-        textAlign: 'right',
-    }
-});
