@@ -1,9 +1,8 @@
 /**
- * 登录页面
+ * 登录页面 by:sylvia
  */
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Image,
@@ -67,7 +66,6 @@ export default class SignIn extends Component<Props> {
                         autoFocus={false}
                         placeholder="请输入用户名"
                         style={styles.form_user}
-                        inlineImageLeft='email'
                         underlineColorAndroid='transparent'
                         value={this.state.user}
                         onChangeText={(user) => this.setState({user})}

@@ -1,14 +1,16 @@
 /**
- * 忘记密码页面
+ * 忘记密码页面 by:sylvia
  */
 import React, { Component } from 'react';
 import {
     Text,
     View,
     TextInput,
+    Image,
     TouchableOpacity
 } from 'react-native';
 import { styles } from './style/index';
+import GetIdentify from './GetIdentify';
 
 type Props = {};
 export default class ForgetPwd extends Component<Props> {
@@ -42,11 +44,14 @@ export default class ForgetPwd extends Component<Props> {
             elem = (
                 <View style={styles.retrieve_wrap}>
                     <View style={styles.input_wrap}>
+                        <Image
+                            source={require('../../images/login/email.png')}
+                            style={styles.icon}
+                        />
                         <TextInput
                             autoFocus={false}
                             placeholder='输入邮箱地址'
                             style={styles.form_user}
-                            inlineImageLeft='email'
                             underlineColorAndroid='transparent'
                         />
                     </View>
@@ -62,28 +67,32 @@ export default class ForgetPwd extends Component<Props> {
         } else {
             elem = (
                 <View style={styles.retrieve_wrap}>
-                    <View style={styles.phone_wrap}>
+                    <View style={styles.input_wrap}>
+                        <Image
+                            source={require('../../images/login/phone.png')}
+                            style={styles.icon}
+                        />
                         <TextInput
                             autoFocus={false}
-                            placeholder='手机号'
-                            inlineImageLeft='email'
+                            placeholder="手机号"
+                            style={styles.form_user}
                             underlineColorAndroid='transparent'
-                            style={styles.phone}
                         />
-                        <TouchableOpacity onPress={this.submit}>
-                            <Text style={styles.get_identify_text}>
-                                获取验证码
-                            </Text>
-                        </TouchableOpacity>
                     </View>
-
-                    <View>
-                        <TextInput
-                            autoFocus={false}
-                            placeholder="验证码"
-                            style={styles.identify_code}
-                            underlineColorAndroid='transparent'
-                        />
+                    <View style={styles.phone_wrap}>
+                        <View style={styles.phone}>
+                            <Image
+                                source={require('../../images/login/retrieve.png')}
+                                style={styles.icon}
+                            />
+                            <TextInput
+                                autoFocus={false}
+                                placeholder='验证码'
+                                underlineColorAndroid='transparent'
+                                style={styles.form_user}
+                            />
+                        </View>
+                        <GetIdentify/>
                     </View>
                     <View style={styles.form_submit}>
                         <TouchableOpacity onPress={this.submit} style={styles.form_submit_btn}>

@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
     },
     icon: {
-        width: 24,
+        width: 30,
         height: 30,
         top: 10,
         marginLeft: 10,
@@ -140,6 +140,7 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderWidth: 1,
         width: 200,
+        flexDirection: 'row'
     },
     get_identify_text: {
         textAlign: 'center',

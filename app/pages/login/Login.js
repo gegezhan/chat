@@ -1,5 +1,5 @@
 /**
- * 登录注册页
+ * 登录注册页 by:sylvia
  */
 import React, { Component } from 'react';
 import {

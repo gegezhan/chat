@@ -1,5 +1,5 @@
 /**
- * 注册页面
+ * 注册页面 by:sylvia
  */
 import React, { Component } from 'react';
 import {
@@ -10,6 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { styles } from './style/index';
+import GetIdentify from './GetIdentify';
 
 type Props = {};
 export default class SignUp extends Component<Props> {
@@ -17,10 +18,14 @@ export default class SignUp extends Component<Props> {
     constructor(props){
         super(props);
         this.state = {
-            user: 'sylvia',
-            password: '123',
-            rePassword: ''
+            user: '',
+            password: '',
+            rePassword: '',
+            timing: false,
+            timingCount: 10,
+            retrieveTxt: '获取验证码'
         }
+        this.timer = '';
     }
 
     /**
@@ -48,6 +53,36 @@ export default class SignUp extends Component<Props> {
         this.props.signIn ? this.props.signIn() : null
     }
 
+    /**
+     * 获取验证码
+     */
+    getRetrieveCode = () => {
+        this.timer = window.setInterval(this.timingChange, 1000);
+        this.setState({
+            timing: true
+        })
+    }
+
+    /**
+     * 倒计时函数
+     */
+    timingChange = () => {
+        const { timingCount } = this.state;
+        if(timingCount === 0){
+            window.clearInterval(this.timer);
+            this.setState({
+                timingCount: 10,
+                retrieveTxt: '获取验证码',
+                timing: false
+            })
+        }else{
+            this.setState({
+                timingCount: timingCount - 1,
+                retrieveTxt: timingCount || '获取验证码'
+            })
+        }
+    }
+
     render() {
         return (
             <View style={styles.form}>
@@ -60,11 +95,26 @@ export default class SignUp extends Component<Props> {
                         autoFocus={false}
                         placeholder="邮箱或手机号"
                         style={styles.form_user}
-                        inlineImageLeft='email'
                         underlineColorAndroid='transparent'
                         value={this.state.user}
                         onChangeText={(user) => this.setState({user})}
                     />
+                </View>
+                <View style={styles.phone_wrap}>
+                    <View style={styles.phone}>
+                        <Image
+                            source={require('../../images/login/retrieve.png')}
+                            style={styles.icon}
+                        />
+                        <TextInput
+                            autoFocus={false}
+                            placeholder='验证码'
+                            underlineColorAndroid='transparent'
+                            style={styles.form_user}
+                        />
+                    </View>
+
+                    <GetIdentify/>
                 </View>
                 <View style={styles.input_wrap}>
                     <Image
